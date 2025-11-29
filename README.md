@@ -21,12 +21,11 @@ The final agent lives in the **`cxr_agent/`** folder and exposes a Gradio interf
 
 LungLine is designed as an **agentic system**: the user interacts with a single chat interface, and the agent decides which tools to call (QC, classifier, heatmaps, report generator, database) based on the user’s intent and the current state of the case.
 
-![System Architecture](figures/block_diagram.png)
+<img src="figures/block_diagram.png" width="100%"/>
 
 ### Core Capabilities
 
-![Agent Features](figures/features.png)
-
+<img src="figures/features.png" width="70%"/>
 - **Automatic Intent Routing** – Uses OpenAI **Omni** to interpret user queries and route them to the appropriate CXR tools.  
 - **Image Quality Check (QC)** – CLIP‑ViT‑B/32‑based gate that rejects non‑CXR or poor‑quality images and blocks unsafe analysis.  
 - **14‑Class Classification** – Predicts probabilities for common chest X‑ray findings on a balanced MIMIC‑CXR subset (15,319 images).  
