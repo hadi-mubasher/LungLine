@@ -84,13 +84,15 @@ HEATMAP_LOC_CLASSES: List[str] = [
 HEATMAP_LABEL_TO_IDX = {name: i for i, name in enumerate(HEATMAP_LOC_CLASSES)}
 
 # ------------------------------------------------------------
-# OpenAI / GPT-4o-mini
+# OpenAI / GPT-4o-mini and HF
 # ------------------------------------------------------------
 # For safety, we NEVER hard-code the API key in the source file.
 # Set it in the environment before running:
 #   os.environ["OPENAI_API_KEY"] = "sk-..."
 OPENAI_MODEL_NAME = os.environ.get("CXR_AGENT_OPENAI_MODEL", "gpt-4o-mini")
 OPENAI_API_KEY_ENV = "OPENAI_API_KEY"
+
+HUGGING_FACE_API_KEY_ENV = "HF_TOKEN"
 
 # ------------------------------------------------------------
 # Misc constants (heatmap visualisation)

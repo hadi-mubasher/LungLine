@@ -9,7 +9,7 @@ import torch
 from peft import PeftModel
 from transformers import AutoProcessor, AutoModelForImageTextToText
 
-from config import MEDGEMMA_BASE_ID, MEDGEMMA_PEFT_DIR
+from config import MEDGEMMA_BASE_ID, MEDGEMMA_PEFT_DIR, HUGGING_FACE_API_KEY_ENV
 
 
 _MEDGEMMA_MODEL = None
@@ -18,14 +18,17 @@ _MEDGEMMA_PROCESSOR = None
 
 def load_medgemma():
     """Load the MedGemma base model + PEFT adapter once and cache them."""
+    import os
     global _MEDGEMMA_MODEL, _MEDGEMMA_PROCESSOR
+    hf_token=os.environ.get(HUGGING_FACE_API_KEY_ENV)
     if _MEDGEMMA_MODEL is None or _MEDGEMMA_PROCESSOR is None:
         base = AutoModelForImageTextToText.from_pretrained(
             MEDGEMMA_BASE_ID,
             torch_dtype=torch.bfloat16,
             device_map="auto",
+            token=hf_token
         )
-        _MEDGEMMA_MODEL = PeftModel.from_pretrained(base, MEDGEMMA_PEFT_DIR)
+        _MEDGEMMA_MODEL = PeftModel.from_pretrained(base, MEDGEMMA_PEFT_DIR, token=hf_token)
         _MEDGEMMA_MODEL.eval()
         _MEDGEMMA_PROCESSOR = AutoProcessor.from_pretrained(MEDGEMMA_BASE_ID)
         print("MedGemma model + PEFT adapter loaded.")
