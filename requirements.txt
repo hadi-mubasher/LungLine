@@ -1,0 +1,9 @@
+transformers>=4.50.0
+accelerate
+peft
+timm
+gradio
+pydicom
+pillow
+openai
+sqlalchemy
